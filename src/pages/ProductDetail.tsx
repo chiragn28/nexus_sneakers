@@ -260,7 +260,6 @@ export function ProductDetail() {
                     ['Colourway', product.colorway ?? '—'],
                     ['Style code', product.id.toUpperCase()],
                     ['Sizes', `US ${product.sizes[0]}–${product.sizes[product.sizes.length - 1]}`],
-                    ['Upper', 'Engineered mesh (placeholder)'],
                   ].map(([term, value]) => (
                     <div key={term}>
                       <dt className="text-xs uppercase tracking-widest text-ink-500 dark:text-ink-400">

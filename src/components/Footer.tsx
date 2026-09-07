@@ -85,7 +85,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-ink-200 pt-8 dark:border-ink-800 sm:flex-row">
           <p className="text-xs uppercase tracking-widest text-ink-500 dark:text-ink-400">
-            © {new Date().getFullYear()} Nexus Sneakers — Demo store, no real orders.
+            © {new Date().getFullYear()} Nexus Sneakers. All rights reserved.
           </p>
           <div className="flex items-center gap-1">
             {SOCIALS.map(({ label, Icon }) => (

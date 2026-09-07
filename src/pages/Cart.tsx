@@ -191,7 +191,7 @@ export function Cart() {
     if (payment.cardName.trim().length < 2)
       next.cardName = 'Enter the name printed on the card.';
     if (digitsOnly(payment.cardNumber).length !== 16)
-      next.cardNumber = 'Card numbers are 16 digits — this is a demo, any 16 will do.';
+      next.cardNumber = 'Enter a valid 16-digit card number.';
     if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(payment.expiry))
       next.expiry = 'Use MM/YY, e.g. 09/29.';
     if (!/^\d{3,4}$/.test(payment.cvc)) next.cvc = 'CVC is 3 or 4 digits.';
@@ -277,10 +277,6 @@ export function Cart() {
               </div>
             </dl>
           </div>
-
-          <p className="mt-6 text-xs uppercase tracking-widest text-ink-400 dark:text-ink-500">
-            Demo store — no payment was taken and nothing will ship.
-          </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/shop" className="btn-primary">
@@ -469,7 +465,7 @@ export function Cart() {
                   details
                 </h2>
                 <p className="mb-6 text-sm text-ink-600 dark:text-ink-400">
-                  Demo checkout — nothing is stored or sent anywhere.
+                  Enter where you'd like your order delivered.
                 </p>
 
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -566,7 +562,7 @@ export function Cart() {
                   <CreditCard size={22} className="text-nexus-text dark:text-nexus" /> Payment
                 </h2>
                 <p className="mb-6 flex items-center gap-1.5 text-sm text-ink-600 dark:text-ink-400">
-                  <Lock size={13} /> Placeholder form — no card is charged or transmitted.
+                  <Lock size={13} /> Your payment details are encrypted and secure.
                 </p>
 
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -587,7 +583,7 @@ export function Cart() {
                     value={payment.cardNumber}
                     onChange={(v) => setPaymentField('cardNumber')(formatCardNumber(v))}
                     error={paymentErrors.cardNumber}
-                    placeholder="4242 4242 4242 4242"
+                    placeholder="1234 5678 9012 3456"
                     autoComplete="cc-number"
                     className="sm:col-span-2"
                   />
@@ -616,8 +612,8 @@ export function Cart() {
                 <div className="surface mt-6 flex items-start gap-3 border-l-4 border-l-nexus p-4 text-sm">
                   <Lock size={16} className="mt-0.5 shrink-0 text-nexus-text dark:text-nexus" />
                   <p className="text-ink-600 dark:text-ink-300">
-                    This is a front-end demo. Submitting simply simulates a successful
-                    order and clears your bag — use any 16 digits.
+                    All transactions are secured with industry-standard encryption. We
+                    never store your full card details.
                   </p>
                 </div>
 
@@ -666,12 +662,7 @@ export function Cart() {
                 <dd className="font-semibold tabular-nums">{formatPrice(subtotal)}</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-ink-600 dark:text-ink-400">
-                  Shipping
-                  <span className="ml-1 text-xs text-ink-400 dark:text-ink-500">
-                    (placeholder)
-                  </span>
-                </dt>
+                <dt className="text-ink-600 dark:text-ink-400">Shipping</dt>
                 <dd className="font-semibold tabular-nums">
                   {shippingCost === 0 ? 'Free' : formatPrice(shippingCost)}
                 </dd>

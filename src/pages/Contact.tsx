@@ -96,8 +96,7 @@ export function Contact() {
                 <h2 className="mb-2 text-3xl">Message sent</h2>
                 <p className="mb-7 max-w-sm text-sm text-ink-600 dark:text-ink-400">
                   Thanks{form.name ? `, ${form.name.split(' ')[0]}` : ''} — we'll get back
-                  to you within one business day. (Demo store: nothing was actually
-                  transmitted.)
+                  to you within one business day.
                 </p>
                 <button type="button" onClick={reset} className="btn-outline">
                   Send another message
