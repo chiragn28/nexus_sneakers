@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-ink-900 antialiased dark:bg-ink-950 dark:text-ink-50;
+    font-family: theme('fontFamily.sans');
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: theme('fontFamily.display');
+    @apply uppercase leading-[0.9] tracking-tightest;
+  }
+
+  /* Visible, on-brand focus ring for keyboard users (mouse clicks stay clean). */
+  :focus-visible {
+    @apply outline-none ring-2 ring-nexus ring-offset-2 ring-offset-white dark:ring-offset-ink-950;
+  }
+
+  ::selection {
+    @apply bg-nexus text-black;
+  }
+
+  /* Slim, theme-aware scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-ink-100 dark:bg-ink-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-ink-300 dark:bg-ink-700;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-nexus;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-none px-6 py-3
+      text-sm font-bold uppercase tracking-widest transition-all duration-200
+      disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  /* Orange fill always carries BLACK text — 6.3:1, passes AA in both themes. */
+  .btn-primary {
+    @apply btn bg-nexus text-black hover:bg-nexus-400 active:bg-nexus-600;
+  }
+  .btn-solid {
+    @apply btn bg-ink-950 text-white hover:bg-ink-800 dark:bg-white dark:text-ink-950 dark:hover:bg-ink-200;
+  }
+  .btn-outline {
+    @apply btn border-2 border-ink-950 bg-transparent text-ink-950
+      hover:bg-ink-950 hover:text-white
+      dark:border-ink-100 dark:text-ink-50 dark:hover:bg-white dark:hover:text-ink-950;
+  }
+  .btn-ghost {
+    @apply btn px-3 py-2 text-ink-600 hover:text-nexus-text dark:text-ink-300 dark:hover:text-nexus;
+  }
+
+  .field {
+    @apply w-full rounded-none border-2 border-ink-200 bg-white px-4 py-3 text-sm
+      text-ink-900 placeholder-ink-400 transition-colors duration-200
+      focus:border-nexus focus:outline-none
+      dark:border-ink-700 dark:bg-ink-900 dark:text-ink-50 dark:placeholder-ink-500;
+  }
+  .field-error {
+    @apply border-nexus-600 dark:border-nexus-400;
+  }
+
+  .label {
+    @apply mb-1.5 block text-xs font-bold uppercase tracking-widest text-ink-500 dark:text-ink-400;
+  }
+
+  .surface {
+    @apply border border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-900;
+  }
+
+  .container-nexus {
+    @apply mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-12;
+  }
+
+  /* Angular streetwear section divider */
+  .slash-divider {
+    @apply relative h-16 bg-nexus;
+    clip-path: polygon(0 0, 100% 45%, 100% 100%, 0 55%);
+  }
+}
+
+@layer utilities {
+  /* Subtle film grain overlay — sits above backgrounds, below content. */
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .dark .grain::before {
+    opacity: 0.1;
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 1.5px currentColor;
+    color: transparent;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/*
+  Theme switching: the toggle adds `.theme-transition` to <html> for ~320ms so
+  every surface cross-fades together instead of snapping. It is removed again
+  right after, so it never interferes with Framer Motion transforms.
+*/
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    color 300ms ease,
+    fill 300ms ease !important;
+  transition-delay: 0ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition: none !important;
+  }
+  .animate-marquee {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FF4D00" />
+    <!-- Inline SVG favicon: the Nexus mark, no extra request, no 404. -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FF4D00'/%3E%3Cpath d='M8 25V7h4.6l6.8 10.6V7H24v18h-4.6L12.6 14.4V25H8z' fill='%23000'/%3E%3C/svg%3E"
+    />
+    <meta
+      name="description"
+      content="Nexus Sneakers — curated drops, rare colourways and everyday heat."
+    />
+    <title>Nexus Sneakers — Step Into The Nexus</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--
+      Applies the saved / OS theme BEFORE first paint so there is no white flash
+      on load. Reads the same localStorage key that the Zustand store persists to.
+    -->
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('nexus-store');
+          var theme = raw ? JSON.parse(raw).state.theme : null;
+          if (theme !== 'dark' && theme !== 'light') {
+            theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+          }
+          document.documentElement.classList.toggle('dark', theme === 'dark');
+          document.documentElement.style.colorScheme = theme;
+        } catch (e) {
+          /* localStorage unavailable — fall back to light */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
