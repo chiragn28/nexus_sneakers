@@ -16,7 +16,7 @@ interface Form {
 type Errors = Partial<Record<keyof Form, string>>;
 
 const CHANNELS = [
-  { Icon: Mail, title: 'Email', body: 'hey@nexussneakers.demo', note: 'Replies within one business day' },
+  { Icon: Mail, title: 'Email', body: 'nexussneakers@gmail.com', note: 'Replies within one business day' },
   { Icon: Clock, title: 'Support hours', body: 'Mon–Fri, 9am–6pm ET', note: 'Drop days run late' },
 ];
 
